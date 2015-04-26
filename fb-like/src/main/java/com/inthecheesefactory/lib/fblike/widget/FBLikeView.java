@@ -158,7 +158,7 @@ public class FBLikeView extends FrameLayout {
     }
 
     private void refreshButtonsState() {
-        if (AccessToken.getCurrentAccessToken() == null) {
+        if (!isLoggedIn()) {
             btnLoginToLike.setVisibility(View.VISIBLE);
             likeView.setVisibility(View.GONE);
         } else {
@@ -201,6 +201,10 @@ public class FBLikeView extends FrameLayout {
     public static void _onActivityResult(int requestCode, int resultCode, Intent data) {
         if (callbackManager != null)
             callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public static boolean isLoggedIn() {
+        return AccessToken.getCurrentAccessToken() != null;
     }
 
     public static void logout() {
