@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
+import com.facebook.share.widget.LikeView;
 import com.inthecheesefactory.lib.fblike.widget.FBLikeView;
 import com.inthecheesefactory.lib.fblikeandroid.R;
 
@@ -18,6 +20,14 @@ import com.inthecheesefactory.lib.fblikeandroid.R;
 public class MainFragment extends Fragment {
 
     Button btnLogout;
+
+    TextView tvUrl1;
+    TextView tvUrl2;
+    FBLikeView fbLikeView1;
+    FBLikeView fbLikeView2;
+
+    String url1 = "http://nuuneoi.com/blog/blog.php?read_id=816";
+    String url2 = "http://nuuneoi.com/blog/blog.php?read_id=800";
 
     public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();
@@ -35,12 +45,21 @@ public class MainFragment extends Fragment {
     }
 
     private void initInstances(View rootView) {
+        tvUrl1 = (TextView) rootView.findViewById(R.id.tvUrl1);
+        tvUrl2 = (TextView) rootView.findViewById(R.id.tvUrl2);
+        fbLikeView1 = (FBLikeView) rootView.findViewById(R.id.fbLikeView1);
+        fbLikeView2 = (FBLikeView) rootView.findViewById(R.id.fbLikeView2);
+
+        tvUrl1.setText(url1);
+        tvUrl2.setText(url2);
+        fbLikeView1.getLikeView().setObjectIdAndType(url1, LikeView.ObjectType.OPEN_GRAPH);
+        fbLikeView2.getLikeView().setObjectIdAndType(url2, LikeView.ObjectType.OPEN_GRAPH);
+
         btnLogout = (Button) rootView.findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginManager.getInstance().logOut();
-                FBLikeView.loginStatusChanged();
+                FBLikeView.logout();
             }
         });
     }

@@ -4,12 +4,16 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Build;
+import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -33,6 +37,7 @@ public class FBLikeView extends FrameLayout {
 
     LinearLayout btnLoginToLike;
     LikeView likeView;
+    TextView tvLogin;
 
     public FBLikeView(Context context) {
         super(context);
@@ -44,12 +49,14 @@ public class FBLikeView extends FrameLayout {
         super(context, attrs);
         initInflate();
         initInstances();
+        initWithAttrs(attrs, 0, 0);
     }
 
     public FBLikeView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initInflate();
         initInstances();
+        initWithAttrs(attrs, defStyleAttr, 0);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -57,6 +64,7 @@ public class FBLikeView extends FrameLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
         initInflate();
         initInstances();
+        initWithAttrs(attrs, defStyleAttr, defStyleRes);
     }
 
     private void initInflate() {
@@ -64,8 +72,24 @@ public class FBLikeView extends FrameLayout {
         inflater.inflate(R.layout.login_to_like, this);
     }
 
+    private void initWithAttrs(AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        int[] set = {
+            android.R.attr.text        // idx 0
+        };
+        TypedArray a = getContext().obtainStyledAttributes(attrs, set, defStyleAttr, defStyleRes);
+        try {
+            if (a.hasValue(0)) {
+                String text = a.getString(0);
+                setText(text);
+            }
+        } finally {
+            a.recycle();
+        }
+    }
+
     private void initInstances() {
         btnLoginToLike = (LinearLayout) findViewById(R.id.btnLoginToLike);
+        tvLogin = (TextView) findViewById(R.id.tvLogin);
         likeView = (LikeView) findViewById(R.id.likeView);
         likeView.setLikeViewStyle(LikeView.Style.STANDARD);
         likeView.setAuxiliaryViewPosition(LikeView.AuxiliaryViewPosition.INLINE);
@@ -85,6 +109,30 @@ public class FBLikeView extends FrameLayout {
 
     public LikeView getLikeView() {
         return likeView;
+    }
+
+    public void setText(@Nullable CharSequence text) {
+        tvLogin.setText(text);
+    }
+
+    public void setText(@Nullable CharSequence text, @Nullable TextView.BufferType type) {
+        tvLogin.setText(text, type);
+    }
+
+    public void setText(char[] text, int start, int len) {
+        tvLogin.setText(text, start, len);
+    }
+
+    public void setText(@StringRes int resId) {
+        tvLogin.setText(resId);
+    }
+
+    public void setText(@StringRes int resId, @Nullable TextView.BufferType type) {
+        tvLogin.setText(resId, type);
+    }
+
+    public CharSequence getText() {
+        return tvLogin.getText();
     }
 
     @Override
@@ -151,7 +199,13 @@ public class FBLikeView extends FrameLayout {
     }
 
     public static void _onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        if (callbackManager != null)
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public static void logout() {
+        LoginManager.getInstance().logOut();
+        FBLikeView.loginStatusChanged();
     }
 
 }
