@@ -26,8 +26,8 @@ public class MainFragment extends Fragment {
     FBLikeView fbLikeView1;
     FBLikeView fbLikeView2;
 
-    String url1 = "http://nuuneoi.com/blog/blog.php?read_id=816";
-    String url2 = "http://nuuneoi.com/blog/blog.php?read_id=800";
+    String url1 = "http://inthecheesefactory.com/blog/understand-android-activity-launchmode/en";
+    String url2 = "http://inthecheesefactory.com/blog/get-to-know-glide-recommended-by-google/en";
 
     public static MainFragment newInstance() {
         MainFragment fragment = new MainFragment();

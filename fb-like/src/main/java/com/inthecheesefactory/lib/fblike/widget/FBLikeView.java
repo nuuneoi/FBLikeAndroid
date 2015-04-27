@@ -138,6 +138,7 @@ public class FBLikeView extends FrameLayout {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
+        refreshButtonsState();
         FBLikeBus.getInstance().register(this);
     }
 
