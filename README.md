@@ -5,7 +5,7 @@ A wrapper for Facebook Native Like Button (LikeView) on Android
 
 # Version
 
-0.9.3
+1.0.0
 
 # Installation
 
@@ -13,7 +13,7 @@ To use this library in your android project, just simply add the following depen
 
 ```sh
 dependencies {
-    compile 'com.inthecheesefactory.thecheeselibrary:fb-like:0.9.3'
+    compile 'com.inthecheesefactory.thecheeselibrary:fb-like:1.0.0'
 }
 ```
 
@@ -70,6 +70,10 @@ FBLikeView.logout();
 ```
 
 # Change Logs
+
+### v1.0.0
+
+Update Facebook SDK version to v4.4.0
 
 ### v0.9.3
 
