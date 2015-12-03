@@ -90,7 +90,7 @@ public class FBLikeView extends FrameLayout {
     private void initInstances() {
         btnLoginToLike = (LinearLayout) findViewById(R.id.btnLoginToLike);
         tvLogin = (TextView) findViewById(R.id.tvLogin);
-        likeView = (LikeView) findViewById(R.id.likeView);
+        likeView = (LikeView) findViewById(R.id.internalLikeView);
         likeView.setLikeViewStyle(LikeView.Style.STANDARD);
         likeView.setAuxiliaryViewPosition(LikeView.AuxiliaryViewPosition.INLINE);
 
