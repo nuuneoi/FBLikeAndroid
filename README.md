@@ -33,7 +33,7 @@ After that, place `com.inthecheesefactory.lib.fblike.widget.FBLikeView` wherever
 
 <com.inthecheesefactory.lib.fblike.widget.FBLikeView
     android:id="@+id/fbLikeView"
-    androi:text="Login to Like"
+    android:text="Login to Like"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
 ```
